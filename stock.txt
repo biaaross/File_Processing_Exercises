@@ -10,3 +10,6 @@ Cheese,45,65
 Apple,150,5
 Bread,200,7.5
 Cheese,45,65
+Apple,150,5
+Bread,200,7.5
+Cheese,45,65

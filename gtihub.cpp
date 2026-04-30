@@ -4,46 +4,69 @@
 #include <fstream>
 #include <cstdio>
 
-void stockList(const std::string& fileName);
+void listStock(const std::string& fileName);
 void addProduct(const std::string& fileName,const std::string& product,double price,int quantity);
 void deleteProduct(const std::string& fileName,const std::string& target);
 void updatePrice(const std::string& fileName,const std::string target,double newPrice);
 
 int main() {
+    std::string fileName = "stock.txt";
+    int choice;
 
-  std::string fileName = "stock.txt";
+    do {
+        std::cout << "\n--- MENU ---\n";
+        std::cout << "1) List Stock\n";
+        std::cout << "2) Add Product\n";
+        std::cout << "3) Delete Product\n";
+        std::cout << "4) Update Price\n";
+        std::cout << "0) Exit\n";
+        std::cout << "Choice: ";
+        std::cin >> choice;
 
-    addProduct(fileName, "Apple", 3.50, 150);
-    addProduct(fileName, "Milk", 12.00, 80);
-    addProduct(fileName, "Bread", 7.50, 200);
-    addProduct(fileName, "Cheese", 65.00, 45);
+        if(choice == 1) {
+            listStock(fileName);
+        }
+        else if(choice == 2) {
+            std::string product;
+            double price;
+            int quantity;
 
-    std::cout << "--- Initial Stock ---" << std::endl;
-    stockList(fileName);
+            std::cout << "Product name: ";
+            std::cin >> product;
+            std::cout << "Quantity: ";
+            std::cin >> quantity;
+            std::cout << "Price: ";
+            std::cin >> price;
 
-    
-    std::cout << "\n--- Apple price updating ---" << std::endl;
-    updatePrice(fileName, "Apple", 5.00);
+            addProduct(fileName, product, price, quantity);
+        }
+        else if(choice == 3) {
+            std::string target;
+            std::cout << "Product to delete: ";
+            std::cin >> target;
 
-    
-    stockList(fileName);
+            deleteProduct(fileName, target);
+        }
+        else if(choice == 4) {
+            std::string target;
+            double newPrice;
 
-    
-    std::cout << "\n--- Milk deleting ---" << std::endl;
-    deleteProduct(fileName, "Milk");
+            std::cout << "Product name: ";
+            std::cin >> target;
+            std::cout << "New price: ";
+            std::cin >> newPrice;
 
+            updatePrice(fileName, target, newPrice);
+        }
 
-    std::cout << "\n--- Final Stock ---" << std::endl;
-    stockList(fileName);
+    } while(choice != 0);
 
     return 0;
 }
 
 
 
-
-
-void stockList(const std::string& fileName) {
+void listStock(const std::string& fileName) {
     std::ifstream read(fileName);
     if(!read) {
         std::cerr<<"File could not be opened"<<std::endl;
@@ -90,8 +113,6 @@ void addProduct(const std::string& fileName,const std::string& product,double pr
 
     write<<product<<","<<quantity<<","<<price<<std::endl;
 
-
-    
     write.close();
 
 }
@@ -106,6 +127,7 @@ void deleteProduct(const std::string& fileName,const std::string& target) {
     }
 
     std::string line;
+    bool found = false;
     while(getline(read,line)) {
         std::stringstream ss(line);
         std::string productName1;
@@ -113,21 +135,32 @@ void deleteProduct(const std::string& fileName,const std::string& target) {
         if(productName1 != target) {
             write<<line<<std::endl;
         }
+        else {
+            found = true;
+        }
     }
     write.close();
     read.close();
-        remove(fileName.c_str());
+    remove(fileName.c_str());
     rename("temp.txt", fileName.c_str());
+
+    if(!found) {
+        std::cout << "Product not found!\n";
+    }
 }
 
 void updatePrice(const std::string& fileName,const std::string target,double newPrice) {
     std::ofstream write("temp2.txt");
     std::ifstream read(fileName);
+
     if(!read.is_open() || !write.is_open()) {
         std::cerr<<"File could not be opened"<<std::endl;
         return;
     }
-std::string line;
+
+    std::string line;
+    bool found = false;
+
     while(getline(read,line)) {
 
         std::stringstream ss(line);
@@ -138,14 +171,21 @@ std::string line;
         getline(ss, stockStr, ',');
         getline(ss, priceStr, ',');
 
-          if(productName == target) {
+        if(productName == target) {
             write << productName << "," << stockStr << "," << newPrice << std::endl;
+            found = true;
         } else {
             write << line << std::endl;
         }
     }
+
     read.close();
     write.close();
- remove(fileName.c_str());
-rename("temp2.txt", fileName.c_str());
+
+    remove(fileName.c_str());
+    rename("temp2.txt", fileName.c_str());
+
+    if(!found) {
+        std::cout << "Product not found!\n";
+    }
 }
