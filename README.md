@@ -1,39 +1,29 @@
+📌 C++ File Handling & Header Structure Studies
 
-Each project is independent and focuses on a different concept of file handling and system design.
+👨‍💻 About Me
+I am a student who is continuously improving myself in the field of computer programming. This repository contains my work while learning file handling and header/source file structure in C++.
+My goal is to turn theoretical knowledge into practice and gradually learn and apply real-world software development approaches.
 
----
 
-## 🧠 Topics Covered
+📚 What’s in This Repository?
+File reading and writing operations (ifstream, ofstream, fstream)
+File positioning operations (seekg, seekp)
+Working with binary and text files
+Separation of header (.h) and source (.cpp) files
+Modular programming using class structures
+Examples progressing from basic to intermediate level
 
-- File reading and writing in C++
-- CSV file processing
-- Data parsing using string streams
-- Basic system logic design
-- Function-based programming structure
 
----
+🎯 Purpose
+This project is not intended to be a professional product, but rather a workspace that reflects my learning process.
+My code is continuously evolving to become cleaner, more readable, and more maintainable over time.
 
-## 💻 Technologies Used
 
-- C++
-- fstream (file streams)
-- sstream (string streams)
+🚀 Goals
+To gain a deeper understanding of advanced C++ concepts
+To master Object-Oriented Programming (OOP) principles
+To develop projects that solve real-world problems
+To adapt to industry-standard software development practices
+🛠️ Note
 
----
-
-## 🚀 Learning Goal
-
-The goal of this repository is to understand how real-world systems handle data using files and to improve problem-solving skills by building structured, small-scale projects.
-
----
-
-## 📌 Note
-
-This is a learning-focused repository.  
-All exercises are continuously improved as I progress in C++ development.
-
----
-
-## 👨‍💻 Author
-
-A software developer in the learning phase, focused on improving C++ skills, system design thinking, and real-world problem solving.
+This repository is actively being updated as part of my learning journey. Some parts of the code may be incomplete or open to improvement — which is a natural part of the process.
